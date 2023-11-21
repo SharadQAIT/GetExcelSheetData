@@ -21,17 +21,41 @@ public class ExcelUtils {
 		}
 	}
 
-	public static void getRowCount() {
-		int rowCount = sheet.getPhysicalNumberOfRows();
-		System.out.println("No of rows: " + rowCount);
+	public static int getRowCount() {
+		int rowCount=0;
+		try {
+			rowCount = sheet.getPhysicalNumberOfRows();
+			System.out.println("No of rows: " + rowCount);
+		} catch (Exception e) {
+			e.getCause();
+			e.printStackTrace();
+
+		}
+		return rowCount;
+
 	}
 
-	public static void getCellDataString(int rowNum, int colNum) {
+	public static int getColCount() {
+		int colCount = 0;
+		try {
+			colCount = sheet.getRow(0).getPhysicalNumberOfCells();
+			System.out.println("No of cols: " + colCount);
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getCause();
+		}
+		return colCount;
+
+		// return colCount;
+	}
+
+	public static String getCellDataString(int rowNum, int colNum) {
+		String cellData1 = null;
 		try {
 			Projectpath = System.getProperty("user.dir");
 			workbook = new XSSFWorkbook(Projectpath + "/Excel/TestData.xlsx");
 			sheet = workbook.getSheet("sheet1");
-			String cellData1 = sheet.getRow(rowNum).getCell(colNum).getStringCellValue();
+			cellData1 = sheet.getRow(rowNum).getCell(colNum).getStringCellValue();
 			System.out.println("1st coulmn of cell data: " + cellData1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -39,9 +63,11 @@ public class ExcelUtils {
 			e.getCause();
 			e.getMessage();
 		}
+		return cellData1;
 	}
 
-	public static void getCellDataNumeric(int rowNum, int colNum) {
+	public static int getCellDataNumeric(int rowNum, int colNum) {
+		int celldata2=0;
 		try {
 			Projectpath = System.getProperty("user.dir");
 			workbook = new XSSFWorkbook(Projectpath + "/Excel/TestData.xlsx");
@@ -54,6 +80,7 @@ public class ExcelUtils {
 			e.getCause();
 			e.getMessage();
 		}
+		return celldata2;
 
 	}
 }
