@@ -2,6 +2,7 @@ package utils;
 
 import java.io.IOException;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -9,8 +10,7 @@ public class ExcelUtils {
 	static String Projectpath;
 	static XSSFWorkbook workbook;
 	static XSSFSheet sheet;
-	public int celldata2;
-	
+
 	public ExcelUtils(String excelpath, String sheetName) {
 		try {
 			Projectpath = System.getProperty("user.dir");
@@ -27,7 +27,7 @@ public class ExcelUtils {
 	 * 
 	 */
 	public static int getRowCount() {
-		int rowCount=0;
+		int rowCount = 0;
 		try {
 			rowCount = sheet.getPhysicalNumberOfRows();
 			System.out.println("No of rows: " + rowCount);
@@ -37,14 +37,12 @@ public class ExcelUtils {
 
 		}
 		return rowCount;
-
 	}
 
 	/*
 	 * This is column count code
 	 * 
 	 */
-	
 	public static int getColCount() {
 		int colCount = 0;
 		try {
@@ -59,46 +57,31 @@ public class ExcelUtils {
 		// return colCount;
 	}
 
-			/*
-			 * Get string data from excel file
-			 * 
-			 */
-	public static String getCellDataString(int rowNum, int colNum) {
-		String cellData1 =null;
-		try {
-			Projectpath = System.getProperty("user.dir");
-			workbook = new XSSFWorkbook(Projectpath + "/Excel/TestData.xlsx");
-			sheet = workbook.getSheet("sheet1");
-			cellData1 = sheet.getRow(rowNum).getCell(colNum).getStringCellValue();
-			//System.out.println("1st coulmn of cell data: " + cellData1);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			e.getCause();
-			e.getMessage();
-		}
-		return cellData1;
-	}
-	
 	/*
-	 * Get interger data from excel file
+	 * Get string data from excel file
+	 * 
 	 */
-
-	public static double getCellDataNumeric(int rowNum, int colNum) {
-		double celldata2= 0;
+	public static String getCellData(int rowNum, int colNum) {
+		String celldata = null;
 		try {
 			Projectpath = System.getProperty("user.dir");
 			workbook = new XSSFWorkbook(Projectpath + "/Excel/TestData.xlsx");
 			sheet = workbook.getSheet("sheet1");
-			celldata2 = sheet.getRow(rowNum).getCell(rowNum).getNumericCellValue();
-			//System.out.println("|" + cellData2);
+			DataFormatter formatter = new DataFormatter();
+			try {
+				celldata = formatter.formatCellValue(sheet.getRow(rowNum).getCell(colNum));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			e.getCause();
 			e.getMessage();
 		}
-		return celldata2;
+		// get celldata value
+		return celldata;
 
 	}
+
 }

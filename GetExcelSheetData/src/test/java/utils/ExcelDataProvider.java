@@ -1,6 +1,6 @@
 package utils;
 
-public class ExcelDataProvider extends ExcelUtils{
+public class ExcelDataProvider extends ExcelUtils {
 
 	public ExcelDataProvider(String excelpath, String sheetName) {
 		super(excelpath, sheetName);
@@ -19,20 +19,11 @@ public class ExcelDataProvider extends ExcelUtils{
 		int rowCount = excel.getRowCount();
 		int colCount = excel.getColCount();
 
-		System.out.println("rowcount: " + rowCount);
-		System.out.println("colCount: " + colCount);
-
 		for (int i = 1; i < rowCount; i++) {
 			for (int j = 0; j < colCount; j++) {
-				if (j < i) 
 				{
-					String CellData1 = excel.getCellDataString(i, j);
-					System.out.print(CellData1 + "|");
-				} 
-				else 
-				{
-					double CellData2 = excel.getCellDataNumeric(i, j);
-					System.out.print(CellData2);
+					String CellData = excel.getCellData(i, j);
+					System.out.print(CellData + "|");
 				}
 
 			}
