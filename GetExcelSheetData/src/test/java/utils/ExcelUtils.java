@@ -26,7 +26,7 @@ public class ExcelUtils {
 	 * This is row count code
 	 * 
 	 */
-	public static int getRowCount() {
+	public int getRowCount() {
 		int rowCount = 0;
 		try {
 			rowCount = sheet.getPhysicalNumberOfRows();
@@ -43,7 +43,7 @@ public class ExcelUtils {
 	 * This is column count code
 	 * 
 	 */
-	public static int getColCount() {
+	public int getColCount() {
 		int colCount = 0;
 		try {
 			colCount = sheet.getRow(0).getPhysicalNumberOfCells();
@@ -61,13 +61,14 @@ public class ExcelUtils {
 	 * Get string data from excel file
 	 * 
 	 */
-	public static String getCellData(int rowNum, int colNum) {
+	public String getCellData(int rowNum, int colNum) {
 		String celldata = null;
 		try {
 			Projectpath = System.getProperty("user.dir");
 			workbook = new XSSFWorkbook(Projectpath + "/Excel/TestData.xlsx");
 			sheet = workbook.getSheet("sheet1");
-			// converting data from one format to another, such as formatting dates, numbers, or strings.
+			// converting data from one format to another, such as formatting dates,
+			// numbers, or strings.
 			DataFormatter formatter = new DataFormatter();
 			try {
 				celldata = formatter.formatCellValue(sheet.getRow(rowNum).getCell(colNum));

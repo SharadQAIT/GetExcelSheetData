@@ -1,35 +1,45 @@
 package utils;
 
-public class ExcelDataProvider extends ExcelUtils {
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-	public ExcelDataProvider(String excelpath, String sheetName) {
-		super(excelpath, sheetName);
-		// TODO Auto-generated constructor stub
+public class ExcelDataProvider {
+
+	@Test(dataProvider = "test1data")
+	public void test1(String Username, int Password) {
+		System.out.println(Username + "|" + Password);
 	}
 
-	public static void main(String[] args) {
-		String excelpath = System.getProperty("user.dir");
-
-		testData(excelpath + "/Excel/TestData.xlsx", "sheet1");
+	@DataProvider(name = "test1data")
+	public Object[][] getdata() {
+		String excelpath = "C:/Users/Sharad Khairnar/git/repository5/GetExcelSheetData/Excel/TestData.xlsx";
+		
+		// String excelpath = System.getProperty("user.dir");
+		testData(excelpath, "sheet1");
+		Object data[][] = testData(excelpath, "sheet1");
+		return data;
 	}
 
-	@SuppressWarnings("static-access")
-	public static void testData(String excelPath, String sheetName) {
+	public Object[][] testData(String excelPath, String sheetName) {
 		ExcelUtils excel = new ExcelUtils(excelPath, sheetName);
 		int rowCount = excel.getRowCount();
 		int colCount = excel.getColCount();
+
+		Object data[][] = new Object[rowCount - 1][colCount];
 
 		for (int i = 1; i < rowCount; i++) {
 			for (int j = 0; j < colCount; j++) {
 				{
 					String CellData = excel.getCellData(i, j);
 					System.out.print(CellData + "|");
+					data[i - 1][j] = CellData;
 				}
 
 			}
 			System.out.println();
 
 		}
+		return data;
 
 	}
 
