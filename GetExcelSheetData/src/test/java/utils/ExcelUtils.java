@@ -67,6 +67,7 @@ public class ExcelUtils {
 			Projectpath = System.getProperty("user.dir");
 			workbook = new XSSFWorkbook(Projectpath + "/Excel/TestData.xlsx");
 			sheet = workbook.getSheet("sheet1");
+			// converting data from one format to another, such as formatting dates, numbers, or strings.
 			DataFormatter formatter = new DataFormatter();
 			try {
 				celldata = formatter.formatCellValue(sheet.getRow(rowNum).getCell(colNum));
