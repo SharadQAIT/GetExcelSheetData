@@ -9,7 +9,7 @@ public class ExcelUtilsDemo {
 		ExcelUtils excel=new ExcelUtils(projectpath+"/Excel/TestData.xlsx", "sheet1");
 		excel.getRowCount();
 		excel.getColCount();
-		excel.getCellDataString(1, 0);
-		excel.getCellDataNumeric(1, 1);
+	//	excel.getCellDataString(1, 0);
+	//	excel.getCellDataNumeric(1, 1);
 	}
 }

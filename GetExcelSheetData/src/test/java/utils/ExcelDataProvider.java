@@ -1,6 +1,11 @@
 package utils;
 
-public class ExcelDataProvider {
+public class ExcelDataProvider extends ExcelUtils{
+
+	public ExcelDataProvider(String excelpath, String sheetName) {
+		super(excelpath, sheetName);
+		// TODO Auto-generated constructor stub
+	}
 
 	public static void main(String[] args) {
 		String excelpath = System.getProperty("user.dir");
@@ -19,9 +24,17 @@ public class ExcelDataProvider {
 
 		for (int i = 1; i < rowCount; i++) {
 			for (int j = 0; j < colCount; j++) {
-				String CellData1 = excel.getCellDataString(i, j);
-				int CellData2 = excel.getCellDataNumeric(i, j);
-				System.out.print(CellData1 + "|" + CellData2);
+				if (j < i) 
+				{
+					String CellData1 = excel.getCellDataString(i, j);
+					System.out.print(CellData1 + "|");
+				} 
+				else 
+				{
+					double CellData2 = excel.getCellDataNumeric(i, j);
+					System.out.print(CellData2);
+				}
+
 			}
 			System.out.println();
 
