@@ -1,7 +1,9 @@
 package utils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,8 +16,9 @@ public class ExcelUtils {
 	public ExcelUtils(String excelpath, String sheetName) {
 		try {
 			Projectpath = System.getProperty("user.dir");
-			workbook = new XSSFWorkbook(excelpath);
-			sheet = workbook.getSheet(sheetName);
+			FileInputStream fileinputstream = new FileInputStream(Projectpath + "/Excel/TestData.xlsx");
+			workbook = new XSSFWorkbook(fileinputstream);
+			sheet = workbook.getSheetAt(0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -25,6 +28,7 @@ public class ExcelUtils {
 	/*
 	 * This is row count code
 	 * 
+	 * pub
 	 */
 	public int getRowCount() {
 		int rowCount = 0;
@@ -65,8 +69,10 @@ public class ExcelUtils {
 		String celldata = null;
 		try {
 			Projectpath = System.getProperty("user.dir");
-			workbook = new XSSFWorkbook(Projectpath + "/Excel/TestData.xlsx");
-			sheet = workbook.getSheet("sheet1");
+			FileInputStream fileinputstream = new FileInputStream(Projectpath + "/Excel/TestData.xlsx");
+			workbook = new XSSFWorkbook(fileinputstream);
+			sheet = workbook.getSheetAt(0);
+
 			// converting data from one format to another, such as formatting dates,
 			// numbers, or strings.
 			DataFormatter formatter = new DataFormatter();
